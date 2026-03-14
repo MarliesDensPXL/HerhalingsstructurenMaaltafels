@@ -16,7 +16,7 @@
             {
 
                 Console.Write("Welke tafel wil je oefenen? ");
-                isValid = int.TryParse(Console.ReadLine(), out choice);
+                isValid = (int.TryParse(Console.ReadLine(), out choice) && choice >=0);
                 Console.WriteLine();
 
             } while (!isValid);
