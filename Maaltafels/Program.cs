@@ -13,6 +13,8 @@
             //Console.ResetColor();
             //Console.WriteLine();
 
+            
+
             string repeat;
 
             do
@@ -28,18 +30,19 @@
 
             Console.WriteLine();
             ShowColoredText("Nu alles door elkaar!", ConsoleColor.Magenta, true);
-            
+
             //Console.ForegroundColor = ConsoleColor.Magenta;
             //Console.WriteLine("Nu alles door elkaar!");
             //Console.ResetColor();
             //Console.WriteLine();
 
-                       
 
-            
+
+            int counter = 0;
 
             do
             {
+                counter++;
                 Console.Write("Wat kies je? x of : ");
                 string operation = Console.ReadLine();
 
@@ -64,6 +67,10 @@
 
                 Console.WriteLine();
                 ShowColoredText("Proficiat! Goed geoefend!", ConsoleColor.Green, true);
+                if ((counter % 3) == 0)
+                {
+                    ShowUnicorn();
+                }
 
                 //Console.ForegroundColor = ConsoleColor.Green;
                 //Console.WriteLine("Proficiat! Goed geoefend!");
@@ -178,6 +185,12 @@
                     }
                 } while (result != number1);
             }
+        }
+
+        private static void ShowUnicorn()
+        {
+            Console.WriteLine("                            ___________ _\r\n  \\/                    __/   .::::.-'-(/-/)\r\n                     _/:  .::::.-' .-'\\/\\_`*******          __ (_))\r\n        \\/          /:  .::::./   -._-.  d\\|               (_))_(__))\r\n                     /: (\"\"\"\"/    '.  (__/||           (_))__(_))--(__))\r\n                      \\::).-'  -._  \\/ \\\\/\\|\r\n              __ _ .-'`)/  '-'. . '. |  (i_O\r\n          .-'      \\       -'      '\\|\r\n     _ _./      .-'|       '.  (    \\\\                         % % %\r\n  .-'   :      '_  \\         '-'\\  /|/      @ @ @             % % % %\r\n /      )\\_      '- )_________.-|_/^\\      @ @ @@@           % %\\/% %\r\n (   .-'   )-._-:  /        \\(/\\'-._ `.     @|@@@@@            ..|........\r\n  (   )  _//_/|:  /          `\\()   `\\_\\     |/_@@             )'-._.-._.-\r\n   ( (   \\()^_/)_/             )/      \\\\    /                /   /\r\n    )  _.-\\\\.\\(_)__._.-'-.-'-.//_.-'-.-.)\\-'/._              /\r\n.-.-.-'   _o\\ \\\\\\     '::'   (o_ '-.-' |__\\'-.-;~ ~ ~ ~ ~ ~~/   /\\\r\n          \\ /  \\\\\\__          )_\\    .:::::::.-'\\          '- - -|\r\n     :::''':::::^)__\\:::::::::::::::::'''''''-.  \\                '- - -\r\n    :::::::  '''''''''''   ''''''''''''':::. -'\\  \\     C. SWANSIGER\r\n_____':::::_____________________________________\\__\\______________________");
+
         }
 }
 }
