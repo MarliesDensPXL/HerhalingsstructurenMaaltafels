@@ -1,4 +1,6 @@
-﻿namespace Maaltafels
+﻿using System.Xml.Serialization;
+
+namespace Maaltafels
 {
     internal class Program
     {
@@ -13,77 +15,93 @@
             //Console.ResetColor();
             //Console.WriteLine();
 
-            
-
             string repeat;
 
-            do
+            string choice = ReadAction("Wil je rijtjes oefenen of alles door elkaar? \n1. Rijtjes\n2. Door elkaar\nGeef je keuze door: ");
+
+            switch (choice)
             {
+                case "1":
+                    
 
-                PracticeTableRow();
+                    do
+                    {
 
-                ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
-                
-                repeat = Console.ReadLine();
-                Console.WriteLine();
-            } while (repeat.Equals("ja"));
+                        PracticeTableRow();
 
-            Console.WriteLine();
-            ShowColoredText("Nu alles door elkaar!", ConsoleColor.Magenta, true);
+                        ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
 
-            //Console.ForegroundColor = ConsoleColor.Magenta;
-            //Console.WriteLine("Nu alles door elkaar!");
-            //Console.ResetColor();
+                        repeat = Console.ReadLine();
+                        Console.WriteLine();
+                    } while (repeat.Equals("ja"));
+                    break;
+
+                case "2":
+                    int counter = 0;
+
+                    do
+                    {
+                        counter++;
+                        string operation = ReadAction("Wat kies je? \n 1. maaltafels\n 2. deeltafels \n Geef je keuze door: ");
+                        
+                        //Console.Write("Wat kies je? x of : ");
+                        //string operation = Console.ReadLine();
+
+                        switch (operation)
+                        {
+
+                            case "1":
+                                PracticeMultiply();
+                                break;
+
+                            case "2":
+                                PracticeDivision();
+                                break;
+                            //default:
+                            //    ShowColoredText("Ongeldige invoer!", ConsoleColor.Red, true);
+
+                            //    break;
+
+                        }
+
+
+
+                        Console.WriteLine();
+                        ShowColoredText("Proficiat! Goed geoefend!", ConsoleColor.Green, true);
+                        if ((counter % 3) == 0)
+                        {
+                            ShowUnicorn();
+                        }
+
+                        //Console.ForegroundColor = ConsoleColor.Green;
+                        //Console.WriteLine("Proficiat! Goed geoefend!");
+                        //Console.WriteLine();
+                        //Console.ResetColor();
+
+                        ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
+
+                        repeat = Console.ReadLine();
+                        Console.WriteLine();
+
+
+                    } while (repeat.Equals("ja"));
+                    break;
+            }
+
+            
+
             //Console.WriteLine();
+            //ShowColoredText("Nu alles door elkaar!", ConsoleColor.Magenta, true);
 
+          
 
+            
 
-            int counter = 0;
+            Console.WriteLine("Tot volgende keer!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("Duw op eender welke toets om het programma te eindigen..");
+            Console.ResetColor();
 
-            do
-            {
-                counter++;
-                Console.Write("Wat kies je? x of : ");
-                string operation = Console.ReadLine();
-
-                switch (operation)
-                {
-
-                    case "x":
-                        PracticeMultiply();
-                        break;
-
-                    case ":":
-                        PracticeDivision();
-                        break;
-                    default:
-                        ShowColoredText("Ongeldige invoer!", ConsoleColor.Red, true);
-                        
-                        break;
-
-                }
-                        
-                               
-
-                Console.WriteLine();
-                ShowColoredText("Proficiat! Goed geoefend!", ConsoleColor.Green, true);
-                if ((counter % 3) == 0)
-                {
-                    ShowUnicorn();
-                }
-
-                //Console.ForegroundColor = ConsoleColor.Green;
-                //Console.WriteLine("Proficiat! Goed geoefend!");
-                //Console.WriteLine();
-                //Console.ResetColor();
-
-                ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
-
-                repeat = Console.ReadLine();
-                Console.WriteLine();
-
-
-            } while (repeat.Equals("ja"));
         }
 
         private static void ShowColoredText(string text, ConsoleColor color, bool appendLine)
@@ -97,6 +115,25 @@
             Console.ResetColor();
 
         }
+
+        private static string ReadAction(string message)
+        {
+            string output;
+            do
+            {
+                ShowColoredText($"{message}", ConsoleColor.Magenta, false);
+                output = Console.ReadLine();
+                if (!output.Equals("1") && !output.Equals("2"))
+                {
+                    Console.WriteLine("Ongeldige invoer!");
+
+                }
+                                
+                return output;
+                
+            } while (!output.Equals("1") && !output.Equals("2"));
+        } 
+        
 
         private static void PracticeTableRow()
         {
@@ -189,7 +226,26 @@
 
         private static void ShowUnicorn()
         {
-            Console.WriteLine("                            ___________ _\r\n  \\/                    __/   .::::.-'-(/-/)\r\n                     _/:  .::::.-' .-'\\/\\_`*******          __ (_))\r\n        \\/          /:  .::::./   -._-.  d\\|               (_))_(__))\r\n                     /: (\"\"\"\"/    '.  (__/||           (_))__(_))--(__))\r\n                      \\::).-'  -._  \\/ \\\\/\\|\r\n              __ _ .-'`)/  '-'. . '. |  (i_O\r\n          .-'      \\       -'      '\\|\r\n     _ _./      .-'|       '.  (    \\\\                         % % %\r\n  .-'   :      '_  \\         '-'\\  /|/      @ @ @             % % % %\r\n /      )\\_      '- )_________.-|_/^\\      @ @ @@@           % %\\/% %\r\n (   .-'   )-._-:  /        \\(/\\'-._ `.     @|@@@@@            ..|........\r\n  (   )  _//_/|:  /          `\\()   `\\_\\     |/_@@             )'-._.-._.-\r\n   ( (   \\()^_/)_/             )/      \\\\    /                /   /\r\n    )  _.-\\\\.\\(_)__._.-'-.-'-.//_.-'-.-.)\\-'/._              /\r\n.-.-.-'   _o\\ \\\\\\     '::'   (o_ '-.-' |__\\'-.-;~ ~ ~ ~ ~ ~~/   /\\\r\n          \\ /  \\\\\\__          )_\\    .:::::::.-'\\          '- - -|\r\n     :::''':::::^)__\\:::::::::::::::::'''''''-.  \\                '- - -\r\n    :::::::  '''''''''''   ''''''''''''':::. -'\\  \\     C. SWANSIGER\r\n_____':::::_____________________________________\\__\\______________________");
+            Console.WriteLine("                            ___________ _\r\n" +
+                "  \\/                    __/   .::::.-'-(/-/)\r\n" +
+                "                     _/:  .::::.-' .-'\\/\\_`*******          __ (_))\r\n" +
+                "        \\/          /:  .::::./   -._-.  d\\|               (_))_(__))\r\n" +
+                "                     /: (\"\"\"\"/    '.  (__/||           (_))__(_))--(__))\r\n" +
+                "                      \\::).-'  -._  \\/ \\\\/\\|\r\n" +
+                "              __ _ .-'`)/  '-'. . '. |  (i_O\r\n" +
+                "          .-'      \\       -'      '\\|\r\n" +
+                "     _ _./      .-'|       '.  (    \\\\                         % % %\r\n" +
+                "  .-'   :      '_  \\         '-'\\  /|/      @ @ @             % % % %\r\n" +
+                " /      )\\_      '- )_________.-|_/^\\      @ @ @@@           % %\\/% %\r\n" +
+                " (   .-'   )-._-:  /        \\(/\\'-._ `.     @|@@@@@            ..|........\r\n" +
+                "  (   )  _//_/|:  /          `\\()   `\\_\\     |/_@@             )'-._.-._.-\r\n" +
+                "   ( (   \\()^_/)_/             )/      \\\\    /                /   /\r\n" +
+                "    )  _.-\\\\.\\(_)__._.-'-.-'-.//_.-'-.-.)\\-'/._              /\r\n" +
+                ".-.-.-'   _o\\ \\\\\\     '::'   (o_ '-.-' |__\\'-.-;~ ~ ~ ~ ~ ~~/   /\\\r\n" +
+                "          \\ /  \\\\\\__          )_\\    .:::::::.-'\\          '- - -|\r\n" +
+                "     :::''':::::^)__\\:::::::::::::::::'''''''-.  \\                '- - -\r\n" +
+                "    :::::::  '''''''''''   ''''''''''''':::. -'\\  \\     C. SWANSIGER\r\n" +
+                "_____':::::_____________________________________\\__\\______________________");
 
         }
 }
