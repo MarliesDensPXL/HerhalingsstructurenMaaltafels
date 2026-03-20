@@ -6,98 +6,97 @@ namespace Maaltafels
     {
         static void Main(string[] args)
         {
+            
             Random rng = new Random();
 
             ShowColoredText("De maaltafels", ConsoleColor.DarkYellow, true);
+            bool repeat = false;
+            int counter = 0;
 
-            //Console.ForegroundColor = ConsoleColor.DarkYellow;
-            //Console.WriteLine("De maaltafels");
-            //Console.ResetColor();
-            //Console.WriteLine();
-
-            string repeat;
-
-            string choice = ReadAction("Wil je rijtjes oefenen of alles door elkaar? \n1. Rijtjes\n2. Door elkaar\nGeef je keuze door: ");
-
-            switch (choice)
+            do
             {
-                case "1":
-                    
+                
+                string choice = ReadAction("Wil je rijtjes oefenen of alles door elkaar?", "1. Rijtjes", "2. Door elkaar");
 
-                    do
-                    {
+                switch (choice)
+                {
 
-                        PracticeTableRow();
+                    case "1":
+                        //repeat = false;
+                        //do
+                        //{
+                            counter++;
+                            PracticeTableRow();
 
-                        ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
+                            //repeat = RepeatAction();
+                            //ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
 
-                        repeat = Console.ReadLine();
-                        Console.WriteLine();
-                    } while (repeat.Equals("ja"));
-                    break;
+                            //repeat = Console.ReadLine();
+                            //Console.WriteLine();
+                        //} while (repeat == true);
+                        break;
 
-                case "2":
-                    int counter = 0;
-
-                    do
-                    {
-                        counter++;
-                        string operation = ReadAction("Wat kies je? \n 1. maaltafels\n 2. deeltafels \n Geef je keuze door: ");
+                    case "2":
                         
-                        //Console.Write("Wat kies je? x of : ");
-                        //string operation = Console.ReadLine();
+                        //repeat = false;
+                        //do
+                        //{
+                            counter++;
+                            string operation = ReadAction("Wat kies je?", "1. maaltafels", "2. deeltafels");
 
-                        switch (operation)
-                        {
+                            //Console.Write("Wat kies je? x of : ");
+                            //string operation = Console.ReadLine();
 
-                            case "1":
-                                PracticeMultiply();
-                                break;
+                            switch (operation)
+                            {
 
-                            case "2":
-                                PracticeDivision();
-                                break;
-                            //default:
-                            //    ShowColoredText("Ongeldige invoer!", ConsoleColor.Red, true);
+                                case "1":
+                                    PracticeMultiply();
+                                    break;
 
-                            //    break;
+                                case "2":
+                                    PracticeDivision();
+                                    break;
+                                    //default:
+                                    //    ShowColoredText("Ongeldige invoer!", ConsoleColor.Red, true);
 
-                        }
+                                    //    break;
 
-
-
-                        Console.WriteLine();
-                        ShowColoredText("Proficiat! Goed geoefend!", ConsoleColor.Green, true);
-                        if ((counter % 3) == 0)
-                        {
-                            ShowUnicorn();
-                        }
-
-                        //Console.ForegroundColor = ConsoleColor.Green;
-                        //Console.WriteLine("Proficiat! Goed geoefend!");
-                        //Console.WriteLine();
-                        //Console.ResetColor();
-
-                        ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
-
-                        repeat = Console.ReadLine();
-                        Console.WriteLine();
+                            }
 
 
-                    } while (repeat.Equals("ja"));
-                    break;
-            }
 
-            
+                            
+
+
+                            //repeat = RepeatAction();
+                            //ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
+
+                            //repeat = Console.ReadLine();
+                            //Console.WriteLine();
+
+
+                        //} while (repeat == true);
+                        break;
+
+                        
+                }
+                Console.WriteLine();
+                ShowColoredText("Proficiat! Goed geoefend!", ConsoleColor.Green, true);
+                if ((counter % 3) == 0)
+                {
+                    ShowUnicorn();
+                }
+                repeat = RepeatAction();
+            } while (repeat == true);
+
 
             //Console.WriteLine();
             //ShowColoredText("Nu alles door elkaar!", ConsoleColor.Magenta, true);
 
-          
 
-            
-
-            Console.WriteLine("Tot volgende keer!");
+            Console.WriteLine();
+            ShowColoredText("Tot volgende keer!", ConsoleColor.DarkYellow, true);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Duw op eender welke toets om het programma te eindigen..");
             Console.ResetColor();
@@ -116,22 +115,27 @@ namespace Maaltafels
 
         }
 
-        private static string ReadAction(string message)
+        private static string ReadAction(string message, string option1, string option2)
         {
             string output;
+            
+            ShowColoredText($"{message}", ConsoleColor.Magenta, true);
+            Console.WriteLine($"{option1}");
+            Console.WriteLine($"{option2}");
             do
             {
-                ShowColoredText($"{message}", ConsoleColor.Magenta, false);
+                ShowColoredText("Geef je keuze door: ", ConsoleColor.Magenta, false);
                 output = Console.ReadLine();
                 if (!output.Equals("1") && !output.Equals("2"))
                 {
                     Console.WriteLine("Ongeldige invoer!");
-
                 }
-                                
-                return output;
-                
-            } while (!output.Equals("1") && !output.Equals("2"));
+
+            } while (!output.Equals("1") && !output.Equals("2")); 
+                    
+            return output;
+                         
+            
         } 
         
 
@@ -247,6 +251,20 @@ namespace Maaltafels
                 "    :::::::  '''''''''''   ''''''''''''':::. -'\\  \\     C. SWANSIGER\r\n" +
                 "_____':::::_____________________________________\\__\\______________________");
 
+        }
+
+        private static bool RepeatAction()
+        {
+            ShowColoredText("Wil je nog meer oefenen? ja/ nee: ", ConsoleColor.White, false);
+            string repeat = Console.ReadLine().Trim();
+            if (repeat.Equals("ja"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 }
 }
